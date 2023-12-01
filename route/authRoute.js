@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const app = express();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 // Rota para o cadastro de usuários (Sign Up)
-router.post('/signup', async (req, res) => {
+app.post('/signup', async (req, res) => {
   try {
     const { nome, email, senha, telefones } = req.body;
 
@@ -50,7 +50,7 @@ router.post('/signup', async (req, res) => {
 
 
 // Rota de login
-router.post('/signin', async (req, res) => {
+app.post('/signin', async (req, res) => {
   try {
     const { email, senha } = req.body;
 
@@ -106,7 +106,7 @@ const verifyToken = (req, res, next) => {
 };
 
 // Rota para buscar informações do usuário
-router.get('/user', verifyToken, async (req, res) => {
+app.get('/user', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId);
     if (!user) {
@@ -127,7 +127,7 @@ router.get('/user', verifyToken, async (req, res) => {
 });
 
 // Private-Route
-router.get('/user/:id', verifyToken, async (req, res) => {
+app.get('/user/:id', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId);
     if (!user) {
