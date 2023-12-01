@@ -6,10 +6,9 @@ const authRoutes = require("./route/authRoute");
 
 const app = express();
 app.use(bodyparser.json());
-
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 
 mongoose
   .connect(
