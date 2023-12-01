@@ -96,7 +96,7 @@ Headers: Authorization: Bearer {token}
 - index.js: Arquivo principal para iniciar o servidor.
 - models/user.js: Definição do modelo de usuário para o MongoDB.
 - routes/authRoutes.js: Rotas para autenticação e operações de usuário.
-- middlewares/authMiddleware.js: Middleware para verificar autenticação.
+
 
 # Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir um issue ou enviar um pull request.
