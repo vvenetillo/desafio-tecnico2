@@ -109,6 +109,25 @@ const verifyToken = (req, res, next) => {
 };
 
 // Rota para buscar informações do usuário
+app.get("/", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+    }
+
+    res.json({
+      id: user._id,
+      data_criacao: user.data_criacao,
+      data_atualizacao: user.data_atualizacao,
+      ultimo_login: user.ultimo_login,
+      token: req.header("Authorization"),
+    });
+  } catch (error) {
+    console.error("Erro ao buscar usuário:", error);
+    res.status(500).json({ mensagem: "Erro interno no servidor" });
+  }
+});
 app.get("/user", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId);
